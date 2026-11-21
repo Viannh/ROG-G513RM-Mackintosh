@@ -41,7 +41,11 @@ Interface : en1 (status: active)
 Country   : US
 Channels  : 2g1..2g14, 5g36..5g173 supported
 Bluetooth : USB 13d3:3568 (MediaTek Inc., Built-In=Yes, UsbConnector=255)
-BT Kexts  : BlueToolFixup (2.7.3) + SimpleMtkBtPatcher (1.0.0) + SimpleMtkBtFw (1.0.0)
+            State: On | Firmware Version: v9489 c6166 | Transport: USB
+BT Kexts  : BlueToolFixup (2.7.3) + AirportMtkBtFw (2.2.1, OSBundleRequired=Root)
+            (Note: AirportMtkBtPatcher disabled — causes IOGMD panic on Sequoia)
+Shutdown  : Clean full power-off verified (-nvrmnoshutdown + SSDT-PTS-FixShutdown)
+Fast Boot : Debug Target=0, APFS HideVerbose=true, SetApfsTrimTimeout=0, Timeout=2
 Ethernet  : com.insanelymac.LucyRTL8125Ethernet (1.2.400)
 Link Rate : 1000baseT <full-duplex> (1.00 Gbps), Ierrs=0, Oerrs=0, TCP Retransmits=0
 

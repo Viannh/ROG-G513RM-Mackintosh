@@ -41,8 +41,8 @@
     <text x="630" y="102" fill="#e6edf3">Wi-Fi Card    : <tspan fill="#7ee787" font-weight="700">MediaTek MT7922</tspan> (14C3:7922)</text>
     <text x="630" y="124" fill="#e6edf3">Wi-Fi Driver  : AirportMtkWlan v2.1.6 · <tspan fill="#7ee787">en1 active</tspan></text>
     <text x="630" y="146" fill="#e6edf3">Wi-Fi Bands   : CC=US · 2.4 GHz (1-14) + <tspan fill="#7ee787">5 GHz (36-173)</tspan></text>
-    <text x="630" y="168" fill="#e6edf3">Bluetooth     : <tspan fill="#7ee787">MT7922 USB (13D3:3568)</tspan> · Internal Type 255</text>
-    <text x="630" y="190" fill="#e6edf3">BT Stack      : BlueToolFixup + SimpleMtkBtPatcher + Fw</text>
+    <text x="630" y="168" fill="#e6edf3">Bluetooth     : <tspan fill="#7ee787" font-weight="700">MT7922 USB (13D3:3568)</tspan> · State: On (v9489)</text>
+    <text x="630" y="190" fill="#e6edf3">BT Stack      : BlueToolFixup v2.7.3 + AirportMtkBtFw v2.2.1</text>
     <text x="630" y="212" fill="#e6edf3">Ethernet LAN  : <tspan fill="#7ee787">RTL8125B 2.5GbE</tspan> · 1000baseT Full-Duplex</text>
     <text x="630" y="234" fill="#e6edf3">LAN Errors    : Ierrs=0 · Oerrs=0 · TCP Retransmits=0</text>
 

@@ -78,13 +78,14 @@ Full sanitized hardware & driver verification outputs are available in [`assets/
 | **300 Hz Internal Display** | ✅ Working | `1920x1080 @ 300 Hz` (`711.36 MHz` pixel clock, 0 frame timeouts) |
 | **Hardware Brightness & Fn Keys** | ✅ Working | Native `AppleBacklightDisplay` unlocked via `nvregdwords=EnableBrightnessControl=1` + `BrightnessKeys.kext` |
 | **Wi-Fi 6E (MT7922)** | ✅ Working | `AirportMtkWlan.kext` **v2.1.6** + `DisableIoMapper = true` + `mtk_cc=US -no160` (2.4 GHz & 5 GHz Ch 36–173) |
-| **Bluetooth (MT7922 `13D3:3568`)** | ✅ Configured | `BlueToolFixup` (v2.7.3) + `SimpleMtkBtPatcher` + `SimpleMtkBtFw` (USB `XHC0/HS02` mapped as Internal `255`) |
+| **Bluetooth (MT7922 `13D3:3568`)** | ✅ Working | `BlueToolFixup` (v2.7.3) + `AirportMtkBtFw` (v2.2.1, `OSBundleRequired=Root`), State: On, Firmware `v9489 c6166` *(do NOT enable `AirportMtkBtPatcher` on Sequoia — causes IOGMD panic)* |
 | **2.5GbE Ethernet** | ✅ Working | `LucyRTL8125Ethernet.kext` v1.2.400 (1 Gbps Full-Duplex verified, 0 errors/retransmits) |
 | **Audio (Speaker / Mic / Jack)** | ✅ Working | `AppleALC.kext` v1.9.8 (`alcid=21`, Realtek ALC294) |
-| **I2C Precision Touchpad** | ✅ Working | `VoodooI2C` + `VoodooI2CHID` (`-vi2c-force-polling`) — full 5-finger Magic Trackpad 2 gestures |
+| **I2C Precision Touchpad** | ✅ Working | `VoodooI2C` + `VoodooI2CHID` + `VoodooInput` (`-vi2c-force-polling`) — full 5-finger Magic Trackpad 2 gestures |
 | **USB & Keyboard (Zero Lag)** | ✅ Working | `USBToolBox` + custom `UTBMap.kext` + **12x Rembrandt XHCI interrupter-0 kernel patches** |
 | **Battery Indicator** | ✅ Working | `ECEnabler.kext` + `SMCBatteryManager.kext` |
-| **Restart & Shutdown** | ✅ Configured | `FACP` reset patch (`0xCF9/0x06`), `SSDT-PTS-FixShutdown`, `SSDT-GPRW`, `DisableRtcChecksum`, `-nvrmnoshutdown` |
+| **Restart & Shutdown** | ✅ Working | Clean full power-off verified via **`-nvrmnoshutdown`** + `FACP` reset patch (`0xCF9/0x06`), `SSDT-PTS-FixShutdown`, `SSDT-GPRW`, `DisableRtcChecksum` |
+| **Fast Boot Optimization** | ✅ Working | `SetApfsTrimTimeout = 0` (cuts 4.3s NVMe TRIM delay), `Debug Target = 0`, `APFS HideVerbose = true`, `Timeout = 2s`, clean Apple logo boot |
 | **Display Sleep** | ✅ Working | Safe `pmset` via [`Scripts/fix_sleep.sh`](Scripts/fix_sleep.sh) (`sleep 0`, `hibernatemode 0`, `displaysleep 10/15`) |
 | **System Sleep (S3 / S0ix)** | ⚠️ Hardware Limit | G513RM BIOS uses Windows Modern Standby (**S0ix**; `_S3` renamed to `XS3`). macOS does not support S0ix — use Display Sleep |
 | **iPhone Mirroring / AirDrop** | ❌ Unsupported | Requires physical Apple T2 / Apple Silicon Secure Enclave and native Broadcom AWDL |
@@ -106,6 +107,7 @@ The G513RM's internal 300 Hz panel (`DPCD 0x701=0x9b`, `0x702=0xa5`) uses a **PW
 - **`WhateverGreen.kext` / AMD iGPU kexts** → Must remain removed/disabled when running NullMoth NVIDIA 3.0 in MUX Ultimate mode.
 - **`VoodooI2C.kext/Contents/PlugIns/VoodooInput.kext`** → Keep disabled to avoid conflict with `VoodooPS2Controller`'s `VoodooInput.kext`.
 - **`AirportMtkWlan.kext`** → Stay on **v2.1.6** for Sequoia + NullMoth stability (avoid mixing v2.2.1 Wi-Fi binary with NullMoth).
+- **`AirportMtkBtPatcher.kext`** → **Must remain disabled/removed on Sequoia!** It triggers an `IOGMD` kernel panic (upstream issue #16/#18). Use only **`BlueToolFixup.kext` + `AirportMtkBtFw.kext` (v2.2.1 with `OSBundleRequired = Root`)** for working MT7922 Bluetooth alongside Wi-Fi.
 
 ### 4. Eliminating 2-Second USB Lag & Double-Typing
 AMD Rembrandt XHCI controllers cause severe USB latency in macOS without the **12 `Rembrandt XHCI interrupter 0` (`AppleUSBXHCI`) patches** already included in `EFI/OC/config.plist`.
