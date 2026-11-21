@@ -27,11 +27,27 @@
 
 ---
 
-## Verification Proof
+## Verification Proof (Real Screenshots)
+
+<table>
+  <tr>
+    <td align="center" width="38%">
+      <img src="assets/about-this-mac.png" alt="About This Mac — RTX 3060 6GB on macOS Sequoia 15.8.3" width="260"><br>
+      <sub><b>About This Mac</b> — RTX 3060 Laptop GPU 6 GB, 32 GB DDR5, macOS Sequoia 15.8.3 (Serial Redacted)</sub>
+    </td>
+    <td align="center" width="62%">
+      <img src="assets/system-info-rtx3060.png" alt="System Information — NVIDIA GeForce RTX 3060 Metal 3 @ 300Hz"><br>
+      <sub><b>System Information → Graphics/Displays</b> — Metal 3, 6 GB VRAM, Internal 1920×1080 @ <b>300.00 Hz</b></sub>
+    </td>
+  </tr>
+</table>
 
 ![Sanitized Verification Proof](assets/verification-proof.svg)
 
 Full sanitized hardware & driver verification outputs are available in [`assets/verification-log.txt`](assets/verification-log.txt).
+
+> [!NOTE]
+> While NullMoth NVIDIA 3.0's official upstream qualification matrix lists RTX 5060 as its primary physical validation target and treats RTX 20/30/40 series as experimental, **this repository documents real physical hardware validation of the RTX 3060 Laptop GPU 6GB (GA106-A) on macOS Sequoia 15.8.3** using NullMoth 3.0's pinned NVIDIA Linux firmware `620.70.06` (`fw_fetch.sh`).
 
 ---
 
@@ -121,6 +137,8 @@ If Wi-Fi fails with `firmware ready poll timed out` after rebooting from Windows
 │   └── cek_wifi.sh        # Quick AirportMtkWlan diagnostics
 ├── assets/
 │   ├── banner.svg
+│   ├── about-this-mac.png
+│   ├── system-info-rtx3060.png
 │   ├── verification-proof.svg
 │   └── verification-log.txt
 ├── README.md              # English Documentation

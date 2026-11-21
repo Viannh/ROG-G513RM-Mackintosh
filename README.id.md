@@ -27,11 +27,27 @@
 
 ---
 
-## Bukti Verifikasi Sistem
+## Bukti Verifikasi Sistem (Screenshot Asli)
+
+<table>
+  <tr>
+    <td align="center" width="38%">
+      <img src="assets/about-this-mac.png" alt="About This Mac — RTX 3060 6GB di macOS Sequoia 15.8.3" width="260"><br>
+      <sub><b>About This Mac</b> — RTX 3060 Laptop GPU 6 GB, 32 GB DDR5, macOS Sequoia 15.8.3 (Serial Disensor)</sub>
+    </td>
+    <td align="center" width="62%">
+      <img src="assets/system-info-rtx3060.png" alt="System Information — NVIDIA GeForce RTX 3060 Metal 3 @ 300Hz"><br>
+      <sub><b>System Information → Graphics/Displays</b> — Metal 3, VRAM 6 GB, Panel Internal 1920×1080 @ <b>300.00 Hz</b></sub>
+    </td>
+  </tr>
+</table>
 
 ![Bukti Verifikasi Sistem (Disanitasi)](assets/verification-proof.svg)
 
 Log lengkap hasil verifikasi hardware & driver (yang sudah dibersihkan dari seluruh data pribadi) tersedia di [`assets/verification-log.txt`](assets/verification-log.txt).
+
+> [!NOTE]
+> Meskipun di dokumentasi upstream NullMoth NVIDIA 3.0 kartu RTX 20/30/40 masih berstatus eksperimental (dengan RTX 5060 sebagai target validasi utama developer), **repo ini mendokumentasikan validasi fisik nyata RTX 3060 Laptop GPU 6GB (GA106-A) di macOS Sequoia 15.8.3** menggunakan firmware Linux NVIDIA `620.70.06` yang memang di-pin oleh `fw_fetch.sh` NullMoth 3.0.
 
 ---
 
@@ -121,6 +137,8 @@ Jika Wi-Fi gagal muncul dengan error `firmware ready poll timed out` setelah reb
 │   └── cek_wifi.sh        # Diagnosa cepat AirportMtkWlan
 ├── assets/
 │   ├── banner.svg
+│   ├── about-this-mac.png
+│   ├── system-info-rtx3060.png
 │   ├── verification-proof.svg
 │   └── verification-log.txt
 ├── README.md              # Dokumentasi Bahasa Inggris
