@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420" role="img" aria-label="Verified Hardware Output Snapshot (Sanitized)">
+  <rect width="1200" height="420" rx="14" fill="#0d1117"/>
+  <rect x="1" y="1" width="1198" height="418" rx="13" fill="none" stroke="#30363d" stroke-width="1.5"/>
+
+  <!-- macOS Window Bar -->
+  <rect width="1200" height="40" rx="14" fill="#161b22"/>
+  <rect y="26" width="1200" height="14" fill="#161b22"/>
+  <circle cx="24" cy="20" r="6" fill="#ff5f56"/>
+  <circle cx="44" cy="20" r="6" fill="#ffbd2e"/>
+  <circle cx="64" cy="20" r="6" fill="#27c93f"/>
+  <text x="600" y="25" text-anchor="middle" fill="#8b949e" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="600">
+    Verification Proof — ASUS ROG Strix G513RM · macOS Sequoia 15.8.3 (24H241) [Sanitized]
+  </text>
+
+  <!-- Left Column: GPU & Display -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13.5">
+    <text x="32" y="76" fill="#58a6ff" font-weight="700">$ system_profiler SPDisplaysDataType &amp;&amp; Metal API</text>
+    <text x="32" y="102" fill="#e6edf3">Chipset Model : <tspan fill="#7ee787" font-weight="700">NVIDIA GeForce RTX 3060 Laptop GPU</tspan></text>
+    <text x="32" y="124" fill="#e6edf3">VRAM (Total)  : <tspan fill="#7ee787">6 GB</tspan> (MaxWorkingSet: 4362 MB, PCIe x8)</text>
+    <text x="32" y="146" fill="#e6edf3">Metal Support : <tspan fill="#7ee787" font-weight="700">Metal 3</tspan> (NVMTL over NVK GA106-A)</text>
+    <text x="32" y="168" fill="#e6edf3">Display Panel : TL156VDXP0101 · 1920 x 1080 (Internal)</text>
+    <text x="32" y="190" fill="#e6edf3">Refresh Rate  : <tspan fill="#d2a8ff" font-weight="700">300 Hz</tspan> (PixelClock 711.36 MHz, 0 timeouts)</text>
+    <text x="32" y="212" fill="#e6edf3">Backlight     : <tspan fill="#7ee787" font-weight="700">AppleBacklightDisplay</tspan> (PWM via EnableBrightnessControl=1)</text>
+    <text x="32" y="234" fill="#e6edf3">NullMoth 3.0  : NVRM · NVAccel · NVRMFB · NVRMAGDC <tspan fill="#7ee787">[LOADED]</tspan></text>
+
+    <line x1="32" y1="256" x2="570" y2="256" stroke="#21262d"/>
+
+    <text x="32" y="284" fill="#58a6ff" font-weight="700">$ Audio, Input &amp; Power Verification</text>
+    <text x="32" y="310" fill="#e6edf3">Audio Codec   : <tspan fill="#7ee787">Realtek ALC294</tspan> (AppleALC alcid=21 · Spk/Mic/Line)</text>
+    <text x="32" y="332" fill="#e6edf3">Touchpad I2C  : <tspan fill="#7ee787">ASUE1403</tspan> (VoodooI2C + Magic Trackpad 2 · 5-finger)</text>
+    <text x="32" y="354" fill="#e6edf3">Battery / SMC : <tspan fill="#7ee787">InternalBattery-0</tspan> (ECEnabler + SMCBatteryManager)</text>
+    <text x="32" y="376" fill="#e6edf3">USB XHCI Fix  : <tspan fill="#7ee787">12x Rembrandt Interrupter-0 Patches</tspan> (0 lag)</text>
+  </g>
+
+  <!-- Vertical divider -->
+  <line x1="600" y1="58" x2="600" y2="392" stroke="#21262d"/>
+
+  <!-- Right Column: Network & Kernel -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13.5">
+    <text x="630" y="76" fill="#58a6ff" font-weight="700">$ Network &amp; Wireless Verification</text>
+    <text x="630" y="102" fill="#e6edf3">Wi-Fi Card    : <tspan fill="#7ee787" font-weight="700">MediaTek MT7922</tspan> (14C3:7922)</text>
+    <text x="630" y="124" fill="#e6edf3">Wi-Fi Driver  : AirportMtkWlan v2.1.6 · <tspan fill="#7ee787">en1 active</tspan></text>
+    <text x="630" y="146" fill="#e6edf3">Wi-Fi Bands   : CC=US · 2.4 GHz (1-14) + <tspan fill="#7ee787">5 GHz (36-173)</tspan></text>
+    <text x="630" y="168" fill="#e6edf3">Bluetooth     : <tspan fill="#7ee787">MT7922 USB (13D3:3568)</tspan> · Internal Type 255</text>
+    <text x="630" y="190" fill="#e6edf3">BT Stack      : BlueToolFixup + SimpleMtkBtPatcher + Fw</text>
+    <text x="630" y="212" fill="#e6edf3">Ethernet LAN  : <tspan fill="#7ee787">RTL8125B 2.5GbE</tspan> · 1000baseT Full-Duplex</text>
+    <text x="630" y="234" fill="#e6edf3">LAN Errors    : Ierrs=0 · Oerrs=0 · TCP Retransmits=0</text>
+
+    <line x1="630" y1="256" x2="1168" y2="256" stroke="#21262d"/>
+
+    <text x="630" y="284" fill="#58a6ff" font-weight="700">$ OpenCore &amp; Privacy Validation</text>
+    <text x="630" y="310" fill="#e6edf3">OpenCore      : <tspan fill="#7ee787">1.0.8</tspan> · config.plist plutil -lint: <tspan fill="#7ee787">OK</tspan></text>
+    <text x="630" y="332" fill="#e6edf3">ACPI Custom   : CPUR · EC · USBX · GPRW · PTS-FixShutdown</text>
+    <text x="630" y="354" fill="#e6edf3">Power Mgmt    : pmset sleep=0 hibernate=0 (Safe DisplaySleep)</text>
+    <text x="630" y="376" fill="#e6edf3">SMBIOS Audit  : <tspan fill="#7ee787" font-weight="700">Serial / MLB / UUID / MAC Redacted</tspan></text>
+  </g>
+</svg>

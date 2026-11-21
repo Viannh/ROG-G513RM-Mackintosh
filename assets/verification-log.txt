@@ -1,0 +1,55 @@
+========================================================================
+Sanitized Hardware & Driver Verification Log
+Device : ASUS ROG Strix G513RM (BIOS G513RM.327)
+OS     : macOS Sequoia 15.8.3 (Build 24H241, Darwin 24.6.0)
+Loader : OpenCore 1.0.8 (SMBIOS: MacBookPro16,3)
+Note   : All personal identifiers (Serial, MLB, UUID, MAC, IP, SSID)
+         have been redacted.
+========================================================================
+
+[1] GPU & Metal 3 (NullMoth NVIDIA 3.0)
+----------------------------------------
+Chipset Model: NVIDIA GeForce RTX 3060 Laptop GPU
+Vendor: NVIDIA (0x10de) | Device ID: 0x2520 | Revision: 0x00a1
+PCIe Lane Width: x8 | VRAM (Total): 6 GB
+Metal Support: Metal 3
+Metal API Device: NVIDIA GeForce RTX 3060 Laptop GPU (NVMTL over NVK GA106-A)
+MaxWorkingSet: 4362 MB
+Loaded Kexts:
+  - com.nullmoth.NVRM (3.0)
+  - com.nullmoth.NVAccel (3.0)
+  - com.nullmoth.NVRMFB (3.0)
+  - com.nullmoth.NVRMAGDC (3.0)
+bootguard.log: the desktop came up and stayed up (WindowServer for 45 s); this start counts as good
+
+[2] Display Refresh Rate & Hardware Backlight
+---------------------------------------------
+Panel: TL156VDXP0101 (1920 x 1080, Internal)
+NSScreen maximumFramesPerSecond: 300
+IOFBCurrentPixelClock: 711360000 Hz (711.36 MHz)
+debug.nvrmfb_flip_latch_timeouts: 0
+debug.nvrmfb_flip_latch_late: 0
+Display Class (with nvregdwords=EnableBrightnessControl=1):
+  +-o AppleBacklightDisplay <registered, matched, active>
+      "IODisplayParameters" = {"brightness"={"min"=0,"max"=65535}, ...}
+sysctl debug.nvrmfb_backlight_restore: available
+
+[3] Wireless (MediaTek MT7922) & Ethernet (RTL8125B)
+----------------------------------------------------
+Wi-Fi Kext: com.flxxxxddd.AirportMtkWlan (2.1.6)
+Interface : en1 (status: active)
+Country   : US
+Channels  : 2g1..2g14, 5g36..5g173 supported
+Bluetooth : USB 13d3:3568 (MediaTek Inc., Built-In=Yes, UsbConnector=255)
+BT Kexts  : BlueToolFixup (2.7.3) + SimpleMtkBtPatcher (1.0.0) + SimpleMtkBtFw (1.0.0)
+Ethernet  : com.insanelymac.LucyRTL8125Ethernet (1.2.400)
+Link Rate : 1000baseT <full-duplex> (1.00 Gbps), Ierrs=0, Oerrs=0, TCP Retransmits=0
+
+[4] Audio, Touchpad I2C, Battery
+--------------------------------
+Audio     : Realtek ALC294 (CodecID 0x10EC0294), AppleALC v1.9.8 (alcid=21)
+            Devices: Built-in Output (Internal Speakers), Built-in Microphone, Line In
+Touchpad  : ASUS I2C (VendorID 1267 / ProductID 12698)
+            VoodooI2CHIDDevice -> VoodooI2CPrecisionTouchpadHIDEventDriver (5-finger)
+            -> VoodooI2CNativeEngine -> VoodooInputSimulatorDevice (Magic Trackpad 2)
+Battery   : InternalBattery-0 present (ECEnabler v1.0.6 + SMCBatteryManager v1.3.8)

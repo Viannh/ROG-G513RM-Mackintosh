@@ -1,0 +1,19 @@
+# macOS metadata
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# OpenCore logs & temporary backups
+opencore-*.txt
+*backup*.plist
+*before*.plist
+
+# Large installers / proprietary firmware binaries (must be downloaded separately)
+*.dmg
+*.pkg
+*.run
+*.tar.gz
+*.zip
+NullMoth/

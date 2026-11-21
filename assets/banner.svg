@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320" role="img" aria-label="ASUS ROG Strix G513RM Hackintosh macOS Sequoia 15.8.3 RTX 3060 Metal 3">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19"/>
+      <stop offset="50%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#161b2e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff2e63"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="glow1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2e63" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ff2e63" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glow2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="320" rx="18" fill="url(#bg)"/>
+  <circle cx="160" cy="40" r="220" fill="url(#glow1)"/>
+  <circle cx="1060" cy="290" r="240" fill="url(#glow2)"/>
+  <rect x="1" y="1" width="1198" height="318" rx="17" fill="none" stroke="#334155" stroke-opacity="0.6" stroke-width="1.5"/>
+
+  <!-- Top accent bar -->
+  <rect x="48" y="42" width="112" height="5" rx="2.5" fill="url(#accent)"/>
+
+  <!-- Title -->
+  <text x="48" y="102" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="40" font-weight="800" letter-spacing="-0.5">
+    ASUS ROG Strix G513RM — Hackintosh
+  </text>
+  <text x="48" y="142" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="20" font-weight="500">
+    macOS Sequoia 15.8.3 · OpenCore 1.0.8 · Ryzen 7 6800H · RTX 3060 6GB Metal 3 (NullMoth 3.0)
+  </text>
+
+  <!-- Feature Pills Row 1 -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14" font-weight="600">
+    <rect x="48" y="176" width="214" height="38" rx="10" fill="#1e293b" stroke="#22d3ee" stroke-opacity="0.55"/>
+    <text x="66" y="200" fill="#67e8f9">RTX 3060 6GB · Metal 3</text>
+
+    <rect x="276" y="176" width="194" height="38" rx="10" fill="#1e293b" stroke="#a855f7" stroke-opacity="0.55"/>
+    <text x="294" y="200" fill="#d8b4fe">1080p · 300Hz Native</text>
+
+    <rect x="484" y="176" width="222" height="38" rx="10" fill="#1e293b" stroke="#34d399" stroke-opacity="0.55"/>
+    <text x="502" y="200" fill="#6ee7b7">Native PWM Brightness</text>
+
+    <rect x="720" y="176" width="230" height="38" rx="10" fill="#1e293b" stroke="#f472b6" stroke-opacity="0.55"/>
+    <text x="738" y="200" fill="#f9a8d4">MT7922 Wi-Fi 6E + BT</text>
+
+    <rect x="964" y="176" width="188" height="38" rx="10" fill="#1e293b" stroke="#fbbf24" stroke-opacity="0.55"/>
+    <text x="982" y="200" fill="#fde68a">I2C 5-Finger Touch</text>
+  </g>
+
+  <!-- Footer stats -->
+  <line x1="48" y1="244" x2="1152" y2="244" stroke="#334155" stroke-opacity="0.5"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="13" fill="#94a3b8">
+    <text x="48" y="278">MUX Mode: <tspan fill="#f8fafc" font-weight="700">Ultimate (dGPU Direct)</tspan></text>
+    <text x="360" y="278">SMBIOS: <tspan fill="#f8fafc" font-weight="700">MacBookPro16,3</tspan></text>
+    <text x="610" y="278">Audio: <tspan fill="#f8fafc" font-weight="700">Realtek ALC294 (alcid=21)</tspan></text>
+    <text x="920" y="278">LAN: <tspan fill="#f8fafc" font-weight="700">RTL8125 2.5GbE</tspan></text>
+  </g>
+</svg>
