@@ -76,14 +76,14 @@ Log lengkap hasil verifikasi hardware & driver (yang sudah dibersihkan dari selu
 | :--- | :---: | :--- |
 | **RTX 3060 6GB Metal 3** | ✅ Jalan | **NullMoth NVIDIA 3.0** (`NVRM`, `NVAccel`, `NVRMFB`, `NVRMAGDC`), VRAM 6 GB, akselerasi Metal 3 penuh |
 | **Layar Internal 300 Hz** | ✅ Jalan | `1920x1080 @ 300 Hz` (`711.36 MHz` pixel clock, 0 frame timeout) |
-| **Brightness Hardware & Tombol Fn** | ✅ Jalan | `AppleBacklightDisplay` native aktif lewat `nvregdwords=EnableBrightnessControl=1` + `BrightnessKeys.kext` |
+| **Brightness Hardware & Tombol Fn** | ✅ Jalan | `AppleBacklightDisplay` native aktif lewat `nvregdwords=EnableBrightnessControl=1;DynamicPowerManagement=2` + `BrightnessKeys.kext` |
 | **Wi-Fi 6E (MT7922)** | ✅ Jalan | `AirportMtkWlan.kext` **v2.1.6** + `DisableIoMapper = true` + `mtk_cc=US -no160` (2.4 GHz & 5 GHz Ch 36–173) |
 | **Bluetooth (MT7922 `13D3:3568`)** | ✅ Jalan | `BlueToolFixup` (v2.7.3) + `AirportMtkBtFw` (v2.2.1, `OSBundleRequired=Root`), State: On, Firmware `v9489 c6166` *(JANGAN aktifkan `AirportMtkBtPatcher` di Sequoia — menyebabkan panic IOGMD)* |
 | **Ethernet 2.5GbE** | ✅ Jalan | `LucyRTL8125Ethernet.kext` v1.2.400 (1 Gbps Full-Duplex terverifikasi, 0 error/retransmit) |
 | **Audio (Speaker / Mic / Jack)** | ✅ Jalan | `AppleALC.kext` v1.9.8 (`alcid=21`, Realtek ALC294) |
 | **Touchpad I2C Precision** | ✅ Jalan | `VoodooI2C` + `VoodooI2CHID` + `VoodooInput` (`-vi2c-force-polling`) — gesture 5 jari native Magic Trackpad 2 |
 | **USB & Keyboard (Tanpa Lag)** | ✅ Jalan | `USBToolBox` + `UTBMap.kext` custom + **12 patch `Rembrandt XHCI interrupter 0`** |
-| **Indikator Baterai** | ✅ Jalan | `ECEnabler.kext` + `SMCBatteryManager.kext` |
+| **Baterai & Optimasi Daya** | ✅ Dioptimasi | `ECEnabler` + `SMCBatteryManager`, `DynamicPowerManagement=2`, Reduce Transparency (CPU `WindowServer` ~13%), 60 Hz di baterai + EC `Fn + F5` Silent (~87 W → ~57 W) |
 | **Restart & Shutdown** | ✅ Jalan | Mati total terverifikasi lewat **`-nvrmnoshutdown`** + patch `FACP` (`0xCF9/0x06`), `SSDT-PTS-FixShutdown`, `SSDT-GPRW`, `DisableRtcChecksum` |
 | **Optimasi Fast Boot** | ✅ Jalan | `SetApfsTrimTimeout = 0` (pangkas 4,3 detik TRIM NVMe), `Debug Target = 0`, `APFS HideVerbose = true`, `Timeout = 2s`, boot logo Apple bersih |
 | **Display Sleep** | ✅ Jalan | `pmset` aman lewat [`Scripts/fix_sleep.sh`](Scripts/fix_sleep.sh) (`sleep 0`, `hibernatemode 0`, `displaysleep 10/15`) |
@@ -116,6 +116,12 @@ Controller XHCI AMD Rembrandt akan mengalami lag USB parah di macOS jika tidak m
 Jika Wi-Fi gagal muncul dengan error `firmware ready poll timed out` setelah reboot dari Windows:
 1. **Matikan Fast Startup** di Windows Power Options.
 2. Lakukan **cold power drain** (matikan laptop, cabut charger, tahan tombol Power 15–20 detik, lalu nyalakan langsung masuk macOS).
+
+### 6. Optimasi Baterai (MUX Ultimate + NullMoth 3.0)
+Karena mode MUX Ultimate mengalirkan layar langsung ke RTX 3060 (tanpa iGPU offload / RTD3 ACPI power-gating) dan `/Library/GPUBundles/nvmtl-allow.txt` menjaga `!WindowServer` tetap memakai CPU compositing, konsumsi daya baterai lebih besar dibanding mode Hybrid di Windows. Kombinasi optimasi berikut berhasil menurunkan konsumsi dari **~87 W ke ~57 W** (durasi baterai >2× lebih lama):
+- **`DynamicPowerManagement=2`** di `boot-args` (`nvregdwords=EnableBrightnessControl=1;DynamicPowerManagement=2`) — mengaktifkan manajemen daya dinamis NVIDIA RM bersamaan dengan kontrol backlight PWM.
+- **Reduce Transparency** (`defaults write com.apple.universalaccess reduceTransparency -bool true`) — mematikan blur/transparansi berbasis CPU di Sequoia, menurunkan beban CPU `WindowServer` dari ~35–52% menjadi **~13%**.
+- **60 Hz + Low Power Mode + EC Silent:** Turunkan refresh rate ke **60 Hz** saat memakai baterai, jalankan `sudo sh Scripts/fix_sleep.sh`, tekan **`Fn + F5`** (mode Silent EC ASUS), dan **jangan** jalankan daemon `nvmtl-boost` saat cabut charger.
 
 ---
 

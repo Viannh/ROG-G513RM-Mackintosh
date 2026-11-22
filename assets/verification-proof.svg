@@ -51,7 +51,7 @@
     <text x="630" y="284" fill="#58a6ff" font-weight="700">$ OpenCore &amp; Privacy Validation</text>
     <text x="630" y="310" fill="#e6edf3">OpenCore      : <tspan fill="#7ee787">1.0.8</tspan> · config.plist plutil -lint: <tspan fill="#7ee787">OK</tspan></text>
     <text x="630" y="332" fill="#e6edf3">ACPI Custom   : CPUR · EC · USBX · GPRW · PTS-FixShutdown</text>
-    <text x="630" y="354" fill="#e6edf3">Power Mgmt    : pmset sleep=0 hibernate=0 (Safe DisplaySleep)</text>
+    <text x="630" y="354" fill="#e6edf3">Power Mgmt    : <tspan fill="#7ee787">DPM=2</tspan> · ReduceTransparency · Safe DisplaySleep</text>
     <text x="630" y="376" fill="#e6edf3">SMBIOS Audit  : <tspan fill="#7ee787" font-weight="700">Serial / MLB / UUID / MAC Redacted</tspan></text>
   </g>
 </svg>

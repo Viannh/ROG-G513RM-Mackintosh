@@ -29,7 +29,7 @@ NSScreen maximumFramesPerSecond: 300
 IOFBCurrentPixelClock: 711360000 Hz (711.36 MHz)
 debug.nvrmfb_flip_latch_timeouts: 0
 debug.nvrmfb_flip_latch_late: 0
-Display Class (with nvregdwords=EnableBrightnessControl=1):
+Display Class (with nvregdwords=EnableBrightnessControl=1;DynamicPowerManagement=2):
   +-o AppleBacklightDisplay <registered, matched, active>
       "IODisplayParameters" = {"brightness"={"min"=0,"max"=65535}, ...}
 sysctl debug.nvrmfb_backlight_restore: available
@@ -57,3 +57,6 @@ Touchpad  : ASUS I2C (VendorID 1267 / ProductID 12698)
             VoodooI2CHIDDevice -> VoodooI2CPrecisionTouchpadHIDEventDriver (5-finger)
             -> VoodooI2CNativeEngine -> VoodooInputSimulatorDevice (Magic Trackpad 2)
 Battery   : InternalBattery-0 present (ECEnabler v1.0.6 + SMCBatteryManager v1.3.8)
+Power Opt : nvregdwords=EnableBrightnessControl=1;DynamicPowerManagement=2
+            Reduce Transparency = true (WindowServer CPU dropped from ~35-52% -> ~13%)
+            Battery discharge reduced from ~87.4 W -> ~57.6 W (60 Hz + no nvmtl-boost)

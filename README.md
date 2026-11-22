@@ -76,14 +76,14 @@ Full sanitized hardware & driver verification outputs are available in [`assets/
 | :--- | :---: | :--- |
 | **RTX 3060 6GB Metal 3** | ✅ Working | **NullMoth NVIDIA 3.0** (`NVRM`, `NVAccel`, `NVRMFB`, `NVRMAGDC`), 6 GB VRAM, full Metal 3 acceleration |
 | **300 Hz Internal Display** | ✅ Working | `1920x1080 @ 300 Hz` (`711.36 MHz` pixel clock, 0 frame timeouts) |
-| **Hardware Brightness & Fn Keys** | ✅ Working | Native `AppleBacklightDisplay` unlocked via `nvregdwords=EnableBrightnessControl=1` + `BrightnessKeys.kext` |
+| **Hardware Brightness & Fn Keys** | ✅ Working | Native `AppleBacklightDisplay` unlocked via `nvregdwords=EnableBrightnessControl=1;DynamicPowerManagement=2` + `BrightnessKeys.kext` |
 | **Wi-Fi 6E (MT7922)** | ✅ Working | `AirportMtkWlan.kext` **v2.1.6** + `DisableIoMapper = true` + `mtk_cc=US -no160` (2.4 GHz & 5 GHz Ch 36–173) |
 | **Bluetooth (MT7922 `13D3:3568`)** | ✅ Working | `BlueToolFixup` (v2.7.3) + `AirportMtkBtFw` (v2.2.1, `OSBundleRequired=Root`), State: On, Firmware `v9489 c6166` *(do NOT enable `AirportMtkBtPatcher` on Sequoia — causes IOGMD panic)* |
 | **2.5GbE Ethernet** | ✅ Working | `LucyRTL8125Ethernet.kext` v1.2.400 (1 Gbps Full-Duplex verified, 0 errors/retransmits) |
 | **Audio (Speaker / Mic / Jack)** | ✅ Working | `AppleALC.kext` v1.9.8 (`alcid=21`, Realtek ALC294) |
 | **I2C Precision Touchpad** | ✅ Working | `VoodooI2C` + `VoodooI2CHID` + `VoodooInput` (`-vi2c-force-polling`) — full 5-finger Magic Trackpad 2 gestures |
 | **USB & Keyboard (Zero Lag)** | ✅ Working | `USBToolBox` + custom `UTBMap.kext` + **12x Rembrandt XHCI interrupter-0 kernel patches** |
-| **Battery Indicator** | ✅ Working | `ECEnabler.kext` + `SMCBatteryManager.kext` |
+| **Battery & Power Optimization** | ✅ Tuned | `ECEnabler` + `SMCBatteryManager`, `DynamicPowerManagement=2`, Reduce Transparency (`WindowServer` CPU ~13%), 60 Hz on battery + ASUS EC `Fn + F5` Silent (~87 W → ~57 W) |
 | **Restart & Shutdown** | ✅ Working | Clean full power-off verified via **`-nvrmnoshutdown`** + `FACP` reset patch (`0xCF9/0x06`), `SSDT-PTS-FixShutdown`, `SSDT-GPRW`, `DisableRtcChecksum` |
 | **Fast Boot Optimization** | ✅ Working | `SetApfsTrimTimeout = 0` (cuts 4.3s NVMe TRIM delay), `Debug Target = 0`, `APFS HideVerbose = true`, `Timeout = 2s`, clean Apple logo boot |
 | **Display Sleep** | ✅ Working | Safe `pmset` via [`Scripts/fix_sleep.sh`](Scripts/fix_sleep.sh) (`sleep 0`, `hibernatemode 0`, `displaysleep 10/15`) |
@@ -116,6 +116,12 @@ AMD Rembrandt XHCI controllers cause severe USB latency in macOS without the **1
 If Wi-Fi fails with `firmware ready poll timed out` after rebooting from Windows:
 1. **Disable Fast Startup** in Windows Power Options.
 2. Perform a **full power drain** (shutdown, unplug AC adapter, hold Power button 15–20 seconds, then boot straight into macOS).
+
+### 6. Battery Power Optimization (MUX Ultimate + NullMoth 3.0)
+Because MUX Ultimate routes the internal display directly to the RTX 3060 (no iGPU offload / no RTD3 ACPI power-gating) and NullMoth's `/Library/GPUBundles/nvmtl-allow.txt` keeps `!WindowServer` on CPU compositing, battery draw is higher than on Windows Hybrid mode. Combining these tweaks cut draw from **~87 W down to ~57 W** (doubling battery runtime):
+- **`DynamicPowerManagement=2`** in `boot-args` (`nvregdwords=EnableBrightnessControl=1;DynamicPowerManagement=2`) — enables NVIDIA RM dynamic power management alongside PWM backlight.
+- **Reduce Transparency** (`defaults write com.apple.universalaccess reduceTransparency -bool true`) — disables Sequoia CPU blur compositing, dropping `WindowServer` CPU from ~35–52% down to **~13%**.
+- **60 Hz + Low Power Mode + EC Silent:** Switch display to **60 Hz** on battery, run `sudo sh Scripts/fix_sleep.sh`, press **`Fn + F5`** (ASUS EC Silent profile), and do **not** run `nvmtl-boost` daemon while unplugged.
 
 ---
 
