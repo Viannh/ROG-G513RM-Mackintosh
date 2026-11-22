@@ -142,6 +142,7 @@ Because MUX Ultimate routes the internal display directly to the RTX 3060 (no iG
 │       └── config.plist   # Sanitized OpenCore 1.0.8 config (SMBIOS redacted)
 ├── Scripts/
 │   ├── fix_sleep.sh       # Safe pmset configuration for S0ix laptops
+│   ├── auto_refresh.sh    # Auto 60 Hz (Battery) <-> 300 Hz (AC) CoreGraphics switcher
 │   └── cek_wifi.sh        # Quick AirportMtkWlan diagnostics
 ├── assets/
 │   ├── banner.svg
@@ -166,14 +167,18 @@ Because MUX Ultimate routes the internal display directly to the RTX 3060 (no iG
 3. **Install NullMoth NVIDIA 3.0 (Stage 1 → Stage 2):**
    - For first macOS installation/boot *before* installing NullMoth, temporarily disable `Kernel → Block → com.apple.iokit.IONDRVSupport`.
    - Once inside macOS Sequoia 15.8.3, install [NullMoth NVIDIA 3.0](https://github.com/nullmoth/nvidia-macos-driver) (with NVIDIA Linux driver `620.70.06` firmware), re-enable `IONDRVSupport` block, and reboot.
-4. **Apply Safe Power Management:**
+4. **Apply Safe Power Management & Auto 60/300 Hz:**
    ```sh
    sudo sh Scripts/fix_sleep.sh
+   sh Scripts/auto_refresh.sh --install-agent
    ```
 5. **Dual-Boot Clock Sync (Windows Registry):**
    Set `HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal` (`DWORD = 1`) in Windows to prevent the 7-hour UTC clock drift.
 6. **GPU & CPU Telemetry (Optional):**
    Install NullMoth's **1401 Mac** companion app to monitor RTX 3060 temperature, clocks, VRAM, and wattage (plus `NMSMN.kext` for AMD Ryzen SMU sensor telemetry). Laptop fan curves remain safely managed automatically by the ASUS EC/BIOS.
+7. **Safe macOS Minor Updates (Important for NullMoth AuxKC):**
+   - Keep **Automatic OS Update Downloads/Installs OFF** (`System Settings → General → Software Update`).
+   - Before updating macOS Sequoia, back up your working `EFI` to a FAT32 partition/USB, temporarily disable `Kernel → Block → IONDRVSupport` if needed, run the update, then re-verify/re-install NullMoth 3.0 AuxKC and re-enable `IONDRVSupport` block.
 
 ---
 

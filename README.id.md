@@ -142,6 +142,7 @@ Karena mode MUX Ultimate mengalirkan layar langsung ke RTX 3060 (tanpa iGPU offl
 │       └── config.plist   # Config OpenCore 1.0.8 ter-sanitasi (SMBIOS kosong)
 ├── Scripts/
 │   ├── fix_sleep.sh       # Konfigurasi pmset aman untuk laptop S0ix
+│   ├── auto_refresh.sh    # Otomatis 60 Hz (Baterai) <-> 300 Hz (AC) via CoreGraphics
 │   └── cek_wifi.sh        # Diagnosa cepat AirportMtkWlan
 ├── assets/
 │   ├── banner.svg
@@ -166,14 +167,18 @@ Karena mode MUX Ultimate mengalirkan layar langsung ke RTX 3060 (tanpa iGPU offl
 3. **Install NullMoth NVIDIA 3.0 (Tahap 1 → Tahap 2):**
    - Saat instalasi awal / boot pertama *sebelum* NullMoth terpasang, matikan sementara `Kernel → Block → com.apple.iokit.IONDRVSupport`.
    - Setelah masuk macOS Sequoia 15.8.3, install [NullMoth NVIDIA 3.0](https://github.com/nullmoth/nvidia-macos-driver) (dengan firmware driver NVIDIA Linux `620.70.06`), aktifkan kembali block `IONDRVSupport`, lalu reboot.
-4. **Terapkan Power Management Aman:**
+4. **Terapkan Power Management Aman & Auto 60/300 Hz:**
    ```sh
    sudo sh Scripts/fix_sleep.sh
+   sh Scripts/auto_refresh.sh --install-agent
    ```
 5. **Sinkronisasi Jam Dual-Boot (Windows):**
    Tambahkan `RealTimeIsUniversal = 1` (`DWORD`) di `HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation` pada Windows agar jam tidak selisih 7 jam.
 6. **Pantau Suhu GPU & CPU (Opsional):**
    Install aplikasi companion **1401 Mac** dari NullMoth untuk memantau suhu, clock, VRAM, dan daya RTX 3060 (serta `NMSMN.kext` untuk telemetry SMU CPU AMD Ryzen). Kecepatan kipas laptop tetap otomatis dikontrol oleh BIOS/EC ASUS.
+7. **Tips Aman Update Minor macOS (Penting untuk NullMoth AuxKC):**
+   - Pastikan **Download/Install Update Otomatis macOS dimatikan** (`System Settings → General → Software Update`).
+   - Sebelum update minor Sequoia, backup `EFI` stabil ke partisi FAT32/USB, nonaktifkan sementara `Kernel → Block → IONDRVSupport` bila perlu, jalankan update, lalu verifikasi/rebuild AuxKC NullMoth 3.0 sebelum mengaktifkan kembali block `IONDRVSupport`.
 
 ---
 
